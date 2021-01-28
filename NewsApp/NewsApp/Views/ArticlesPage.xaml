@@ -1,0 +1,57 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:ffimageloading="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
+             x:Class="NewsApp.Views.ArticlesPage"
+             NavigationPage.HasNavigationBar="False"
+             xmlns:ios="clr-namespace:Xamarin.Forms.PlatformConfiguration.iOSSpecific;assembly=Xamarin.Forms.Core"
+             ios:Page.UseSafeArea="true">
+    <Grid RowDefinitions="*, Auto"
+          Padding="10">
+        <RefreshView RefreshColor="OrangeRed"
+                     Command="{Binding RefreshCommand}"
+                     IsRefreshing="{Binding IsExecuted}"
+                     Grid.Row="0">
+            <CollectionView ItemsSource="{Binding Articles}"
+                            SelectionMode="Single"
+                            SelectedItem="{Binding Article}"
+                            SelectionChangedCommand="{Binding GoToDetailsCommand}"
+                            RemainingItemsThreshold="{Binding ItemThreshold}"
+                            RemainingItemsThresholdReachedCommand="{Binding ItemThresholdReachedCommand}"
+                            BackgroundColor="WhiteSmoke">
+                <CollectionView.ItemsLayout>
+                    <LinearItemsLayout Orientation="Vertical" ItemSpacing="5"/>
+                </CollectionView.ItemsLayout>
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <Frame CornerRadius="15"
+                               BorderColor="White"
+                               Padding="10"
+                               HasShadow="False">
+                            <Grid ColumnDefinitions="Auto, Auto"
+                                    RowDefinitions="Auto, Auto, Auto"
+                                    BackgroundColor="White">
+                                <ffimageloading:CachedImage HorizontalOptions="Center"
+                                                            VerticalOptions="Center"
+                                                            DownsampleToViewSize="True"
+                                                            Source="{Binding photo}"
+                                                            Grid.RowSpan="3"
+                                                            Grid.Column="1"
+                                                            WidthRequest="150" HeightRequest="150"/>
+                                <Label Text="{Binding date, StringFormat='Data publikacji: {0}'}"
+                                        FontSize="12"/>
+                                <Label Grid.Row="1"
+                                        Text="{Binding title}"
+                                        FontAttributes="Bold"/>
+                                <Label Grid.Row="2"
+                                        Text="{Binding lead}"
+                                        FontAttributes="Italic"
+                                        VerticalOptions="End"/>
+                            </Grid>
+                        </Frame>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+        </RefreshView>
+    </Grid>
+</ContentPage>
