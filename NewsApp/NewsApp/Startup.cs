@@ -6,6 +6,8 @@ using Microsoft.Extensions.Hosting;
 using NewsApp.Configuration;
 using NewsApp.Services.Interfaces;
 using NewsApp.Services.MainServices;
+using NewsApp.ViewModels;
+using NewsApp.Views;
 using Xamarin.Essentials;
 
 namespace NewsApp
@@ -17,8 +19,8 @@ namespace NewsApp
         public static void Init()
         {
             var systemDir = FileSystem.CacheDirectory;
-            Utils.ExtractSavedResource("NewsAppDemo.appsettings.json", systemDir);
-            var fullConfig = Path.Combine(systemDir, "NewsAppDemo.appsettings.json");
+            Utils.ExtractSavedResource("NewsApp.appsettings.json", systemDir);
+            var fullConfig = Path.Combine(systemDir, "NewsApp.appsettings.json");
 
             var host = new HostBuilder()
                 .ConfigureHostConfiguration(c =>
@@ -37,8 +39,18 @@ namespace NewsApp
 
         private static void ConfigureServices(HostBuilderContext ctx, IServiceCollection services)
         {
+            // MainApp
             services.AddSingleton<App>();
+
+            // Services
             services.AddTransient<IArticlesService, ArticlesService>();
+
+            // Views
+            services.AddTransient<ArticlesPage>();
+
+            // ViewModels
+            services.AddTransient<ArticlesViewModel>();
+            services.AddTransient<ArticleDetailsViewModel>();
         }
     }
 }

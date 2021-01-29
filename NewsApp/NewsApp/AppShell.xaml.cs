@@ -11,8 +11,8 @@ namespace NewsApp
         public AppShell()
         {
             InitializeComponent();
-            Routing.RegisterRoute(nameof(ItemDetailPage), typeof(ItemDetailPage));
-            Routing.RegisterRoute(nameof(NewItemPage), typeof(NewItemPage));
+            Routing.RegisterRoute(nameof(ArticlesPage), typeof(ArticlesPage));
+            Routing.RegisterRoute(nameof(ArticleDetailsPage), typeof(ArticleDetailsPage));
         }
 
     }

@@ -92,7 +92,7 @@ namespace NewsApp.ViewModels
                 return;
             }
 
-            var details = _articlesService.GetArticleDetailsFromAPI(Article.url);
+            var details = await _articlesService.GetArticleDetailsFromAPI(Article.url);
             await Application.Current.MainPage.Navigation.PushAsync(new ArticleDetailsPage(details));
             Article = null;
 

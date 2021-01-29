@@ -14,7 +14,7 @@ namespace NewsApp.Views
 
             Task.Run(async () =>
             {
-
+                await viewModel.GetArticles();
             }).Wait();
 
             BindingContext = viewModel;

@@ -3,6 +3,8 @@ using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 using NewsApp.Services;
 using NewsApp.Views;
+using NewsApp.Configuration;
+using Microsoft.EntityFrameworkCore;
 
 namespace NewsApp
 {
@@ -12,8 +14,9 @@ namespace NewsApp
         public App()
         {
             InitializeComponent();
-
-            DependencyService.Register<MockDataStore>();
+            var db = new NewsDbContext();
+            db.Database.Migrate();
+            Startup.Init();
             MainPage = new AppShell();
         }
 

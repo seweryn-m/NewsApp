@@ -37,7 +37,7 @@ namespace NewsApp.Services.MainServices
             }
         }
 
-        public Task<ArticleDetails> GetArticleDetailsFromDB(int id)
+        public async Task<ArticleDetails> GetArticleDetailsFromDB(int id)
         {
             throw new NotImplementedException();
         }
@@ -65,7 +65,7 @@ namespace NewsApp.Services.MainServices
             }
         }
 
-        public Task<List<Article>> GetArticlesFromDB()
+        public async Task<List<Article>> GetArticlesFromDB()
         {
             throw new NotImplementedException();
         }

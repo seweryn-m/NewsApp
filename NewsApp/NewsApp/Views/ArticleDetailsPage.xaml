@@ -1,5 +1,95 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
-<ContentPage xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" x:Class="NewsApp.Views.ArticleDetailsPage">
-    <ContentPage.Content>
-    </ContentPage.Content>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="NewsApp.Views.ArticleDetailsPage"
+             xmlns:converters="clr-namespace:NewsApp.Converters"
+             xmlns:ffimageloading="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
+             NavigationPage.HasNavigationBar="False">
+    <ContentPage.Resources>
+        <converters:LikedArticledConverter x:Key="articleLiked"/>
+    </ContentPage.Resources>
+    <Grid RowDefinitions="Auto"
+          Padding="0, 0, 0, 5"
+          VerticalOptions="Start">
+        <!-- Details -->
+        <ScrollView Grid.Row="0" Scrolled="ScrollView_Scrolled">
+            <Grid RowDefinitions="Auto, Auto, Auto, Auto, Auto, Auto, Auto, Auto" RowSpacing="2">
+
+                <Frame CornerRadius="0" Padding="0" Grid.RowSpan="2">
+                    <ffimageloading:CachedImage Source="{Binding Details.photo}"
+                                            HeightRequest="250"
+                                            HorizontalOptions="Fill" Aspect="AspectFill"/>
+                </Frame>
+
+                <Label Text="{Binding Details.date, StringFormat='Data publikacji: {0}'}"
+                        FontSize="14"
+                       Padding="5"
+                        HorizontalTextAlignment="End"
+                        Grid.Row="2"/>
+                <Label Text="{Binding Details.title}" FontAttributes="Bold"
+                       FontSize="28"
+                       Padding="5"
+                        Grid.Row="3"/>
+                <Label Text="{Binding Details.author, StringFormat='Autor: {0}'}"
+                        FontSize="16"
+                       Padding="5"
+                        Grid.Row="4"/>
+                <Label Text="{Binding Details.lead}"
+                       FontSize="18"
+                       Padding="5"
+                       Grid.Row="5"/>
+                <Label Grid.Row="6"
+                       Padding="5, 10, 5, 10"
+                       Text="{Binding Details.text}"
+                       FontSize="15"
+                       TextType="Html"/>
+                <Button CornerRadius="12" BackgroundColor="LightSkyBlue"
+                        WidthRequest="150" Text="Fotogaleria"
+                        HorizontalOptions="Center"
+                        Padding="5"
+                        Grid.Row="7"
+                        Command="{Binding ShowGalleryCommand}"/>
+            </Grid>
+        </ScrollView>
+
+        <!-- MenuBar -->
+        <Grid x:Name="MenuBar"
+              ColumnDefinitions="*, Auto, Auto" Padding="5"
+              VerticalOptions="Start">
+            <ImageButton HorizontalOptions="Start"
+                            BackgroundColor="Transparent"
+                            HeightRequest="40" WidthRequest="40"
+                            Command="{Binding GoBackCommand}">
+                <ImageButton.Source>
+                    <FontImageSource Glyph="&#xf060;"
+                                        FontFamily="FA-S"
+                                        Size="44"
+                                        Color="WhiteSmoke"/>
+                </ImageButton.Source>
+            </ImageButton>
+            <ImageButton Grid.Column="1"
+                         BackgroundColor="Transparent"
+                         HeightRequest="40" WidthRequest="40"
+                         Command="{Binding AddRemoveLikeCommand}">
+                <ImageButton.Source>
+                    <FontImageSource Glyph="&#xf004;"
+                                     FontFamily="FA-S"
+                                     Size="44"
+                                     Color="{Binding IsLiked,
+                                            Converter={StaticResource articleLiked}}"/>
+                </ImageButton.Source>
+            </ImageButton>
+            <ImageButton Grid.Column="2"
+                            BackgroundColor="Transparent"
+                            HeightRequest="40" WidthRequest="40"
+                            Command="{Binding ShareCommand}">
+                <ImageButton.Source>
+                    <FontImageSource Glyph="&#xf1e0;"
+                                        FontFamily="FA-S"
+                                        Color="LightSkyBlue"
+                                        Size="44"/>
+                </ImageButton.Source>
+            </ImageButton>
+        </Grid>
+    </Grid>
 </ContentPage>

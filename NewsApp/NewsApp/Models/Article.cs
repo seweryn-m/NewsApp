@@ -1,7 +1,9 @@
-﻿using Newtonsoft.Json;
+﻿using Microsoft.EntityFrameworkCore;
+using Newtonsoft.Json;
 
 namespace NewsApp.Models
 {
+    [Keyless]
     public class Article
     {
         public string title { get; set; }

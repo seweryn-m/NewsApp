@@ -33,13 +33,23 @@
 
     <TabBar>
         <Tab Title="Artykuły">
+            <Tab.Icon>
+                <FontImageSource Glyph="&#xf1ea;"
+                                 FontFamily="FA-S"
+                                 Size="20"/>
+            </Tab.Icon>
             <ShellContent>
-                <local:Articles/>
+                <local:ArticlesPage/>
             </ShellContent>
         </Tab>
         <Tab Title="Ulubione">
+            <Tab.Icon>
+                <FontImageSource Glyph="&#xf004;"
+                                 FontFamily="FA-S"
+                                 Size="20"/>
+            </Tab.Icon>
             <ShellContent>
-                <local:NewItemPage/>
+                <local:ArticlesPage/>
             </ShellContent>
         </Tab>
     </TabBar>
